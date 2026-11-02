@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(kubectl cluster-info 2>&1)",
+      "PowerShell(choco --version 2>&1)",
+      "PowerShell(winget --version 2>&1)",
+      "PowerShell(choco install minikube -y 2>&1)",
+      "PowerShell(Tail-Object -Last 20)",
+      "PowerShell(choco install minikube -y --skip-checksums 2>&1)",
+      "PowerShell(winget install Kubernetes.minikube --accept-package-agreements --accept-source-agreements 2>&1)",
+      "PowerShell(docker run --rm --gpus all ubuntu nvidia-smi 2>&1)",
+      "PowerShell(docker pull ollama/ollama 2>&1)",
+      "PowerShell(docker rm -f ollama 2>&1)",
+      "PowerShell(docker exec ollama ollama pull deepseek-coder:6.7b 2>&1)",
+      "PowerShell(pip install requests -q 2>&1)",
+      "PowerShell(python -c \"import ast; ast.parse\\(open\\('D:/Documents/CODE/documentation_bot/docbot_ui.py'\\).read\\(\\)\\); print\\('Syntax OK'\\)\")",
+      "PowerShell(python -c \"import ast; ast.parse\\(open\\('D:/Documents/CODE/documentation_bot/docbot_ui.py', encoding='utf-8'\\).read\\(\\)\\); print\\('Syntax OK'\\)\")",
+      "PowerShell(python -m pip install requests -q 2>&1)",
+      "PowerShell(python -c \"import requests; print\\('requests OK', requests.__version__\\)\")",
+      "PowerShell(Start-Process python -ArgumentList \"D:\\\\Documents\\\\CODE\\\\documentation_bot\\\\docbot_ui.py\" -WindowStyle Normal)",
+      "PowerShell(Start-Process python -ArgumentList \"D:\\\\Documents\\\\CODE\\\\documentation_bot\\\\bennyai.py\" -WindowStyle Normal)",
+      "PowerShell(python -c \"import ast; ast.parse\\(open\\('D:/Documents/CODE/documentation_bot/bennyai.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "PowerShell(Get-Process python -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force)",
+      "PowerShell(pip install psutil -q)",
+      "PowerShell(python \"D:\\\\Documents\\\\CODE\\\\documentation_bot\\\\bennyai.py\")",
+      "PowerShell(pip install psutil -q 2>$null)",
+      "Bash(python \"D:\\\\Documents\\\\CODE\\\\documentation_bot\\\\bennyai.py\")",
+      "Bash(python -c \"import pdfplumber; print\\('pdfplumber ok'\\)\")",
+      "Bash(python -c \"import PyPDF2; print\\('PyPDF2 ok'\\)\")",
+      "Bash(python -c \"import bs4; print\\('bs4 ok'\\)\")",
+      "Bash(pip install *)",
+      "Bash(python bennyai.py)",
+      "PowerShell(Stop-Process -Name \"ollama\" -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Start-Process \"ollama\" -ArgumentList \"serve\" -WindowStyle Hidden)",
+      "PowerShell(Stop-Process -Name \"ollama\" -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2; $ollamaPath = \\(Get-Command ollama -ErrorAction SilentlyContinue\\).Source; if \\($ollamaPath\\) { Write-Output \"Found ollama at: $ollamaPath\" } else { Get-ChildItem \"C:\\\\Users\\\\Benny\\\\AppData\\\\Local\\\\Programs\\\\Ollama\\\\\" -ErrorAction SilentlyContinue })",
+      "Bash(python startbennyai.py)"
+    ]
+  }
+}

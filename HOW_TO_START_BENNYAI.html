@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BennyAI — How to Start</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --panel: #1a1d2e;
+    --border: #2a2d3e;
+    --fg: #e2e8f0;
+    --dim: #8892a4;
+    --accent: #6c8ef7;
+    --accent2: #f7a26c;
+    --green: #4ade80;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --code-bg: #13161f;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f0f2f8;
+      --panel: #ffffff;
+      --border: #d1d5e0;
+      --fg: #1e2030;
+      --dim: #6b7280;
+      --code-bg: #e8eaf2;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 32px 16px 64px;
+  }
+  .page { max-width: 780px; margin: 0 auto; }
+  header { margin-bottom: 36px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  .logo { font-size: 28px; font-weight: 700; color: var(--accent); letter-spacing: -0.5px; }
+  .logo span { color: var(--accent2); }
+  .subtitle { color: var(--dim); font-size: 14px; margin-top: 4px; }
+
+  h2 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--fg);
+    margin: 32px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2 .num {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    width: 26px; height: 26px;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+
+  code, .cmd {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px 7px;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    font-size: 13px;
+    color: var(--accent2);
+  }
+  .cmd-block {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    font-size: 13px;
+    color: var(--green);
+    margin: 10px 0;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .cmd-block .comment { color: var(--dim); }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .badge-green  { background: #14532d; color: #4ade80; }
+  .badge-yellow { background: #451a03; color: #fbbf24; }
+  .badge-red    { background: #450a0a; color: #f87171; }
+  .badge-blue   { background: #1e3a5f; color: #93c5fd; }
+
+  .checklist { list-style: none; }
+  .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .checklist li:last-child { border-bottom: none; }
+  .check { color: var(--green); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .warn  { color: var(--yellow); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+
+  .tip { background: #1e3a5f22; border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 14px; margin: 16px 0; }
+  .warn-box { background: #45260522; border-left: 3px solid var(--yellow); padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 14px; margin: 16px 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: var(--code-bg); color: var(--dim); text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--border); }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .path { color: var(--accent2); font-family: monospace; font-size: 13px; }
+  footer { color: var(--dim); font-size: 13px; text-align: center; margin-top: 48px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo">Benny<span>AI</span> v1.0</div>
+    <div class="subtitle">Local AI Coding Assistant — How to Start Guide</div>
+  </header>
+
+  <!-- REQUIREMENTS -->
+  <h2><span class="num">1</span> Requirements</h2>
+  <div class="card">
+    <ul class="checklist">
+      <li><span class="check">✓</span><div><strong>Python 3.10+</strong> — already installed on this PC. Verify: <code>python --version</code></div></li>
+      <li><span class="check">✓</span><div><strong>Ollama</strong> — download from <strong>ollama.com</strong> and install. This runs the AI model locally.</div></li>
+      <li><span class="check">✓</span><div><strong>DeepSeek Coder model</strong> — pull it once with: <code>ollama pull deepseek-coder:6.7b</code></div></li>
+      <li><span class="warn">!</span><div><strong>GTX 1050 Ti (4GB VRAM)</strong> — the 6.7b model fits but leaves very little headroom. Keep other GPU apps closed.</div></li>
+    </ul>
+  </div>
+
+  <!-- FIRST TIME SETUP -->
+  <h2><span class="num">2</span> First-Time Setup <span class="badge badge-yellow">Do once</span></h2>
+  <div class="card">
+    <p style="margin-bottom:10px">Open a terminal (PowerShell or CMD) and run these commands in order:</p>
+    <div class="cmd-block"><span class="comment"># 1. Pull the AI model (one-time download, ~4GB)</span>
+ollama pull deepseek-coder:6.7b
+
+<span class="comment"># 2. Python packages install automatically on first launch,
+#    but you can pre-install them now:</span>
+pip install requests pdfplumber beautifulsoup4</div>
+    <div class="tip">The app auto-installs <code>requests</code>, <code>pdfplumber</code>, and <code>beautifulsoup4</code> if missing on first run — so this step is optional.</div>
+  </div>
+
+  <!-- LAUNCHING -->
+  <h2><span class="num">3</span> How to Launch</h2>
+  <div class="card">
+    <p style="margin-bottom:10px"><strong>Every time you want to use BennyAI:</strong></p>
+    <div class="cmd-block"><span class="comment"># Make sure Ollama is running (it may start automatically,
+# or open the Ollama tray app first)</span>
+ollama serve
+
+<span class="comment"># In a separate terminal, launch BennyAI:</span>
+python "D:\Documents\CODE\documentation_bot\bennyai.py"</div>
+
+    <p style="margin-top: 14px; margin-bottom: 10px">Or double-click the file <span class="path">D:\Documents\CODE\documentation_bot\bennyai.py</span> if Python is your default handler for <code>.py</code> files.</p>
+
+    <div class="tip"><strong>Shortcut tip:</strong> Create a <code>.bat</code> file on your Desktop with this content so you can double-click to launch:<br><br>
+    <code style="display:block; padding: 8px; margin-top:6px">@echo off<br>start "" "D:\Documents\CODE\documentation_bot\bennyai.py"</code></div>
+  </div>
+
+  <!-- WHAT LAUNCHES -->
+  <h2><span class="num">4</span> What You'll See</h2>
+  <div class="card">
+    <div class="two-col">
+      <div>
+        <p style="margin-bottom:8px"><strong>Header bar</strong></p>
+        <ul style="padding-left:18px; font-size:14px; color:var(--dim)">
+          <li>🟢 Connected — Ollama is up</li>
+          <li>Model selector — deepseek-coder:6.7b</li>
+          <li>Workspace folder (optional)</li>
+          <li>Online / Offline toggle</li>
+        </ul>
+      </div>
+      <div>
+        <p style="margin-bottom:8px"><strong>Gauges (top row)</strong></p>
+        <ul style="padding-left:18px; font-size:14px; color:var(--dim)">
+          <li>CPU / RAM / GPU / VRAM</li>
+          <li>Two needles: System vs BennyAI</li>
+          <li>VRAM will spike to ~97% while model runs — that's normal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY CONTROLS -->
+  <h2><span class="num">5</span> Key Controls</h2>
+  <div class="card">
+    <table>
+      <tr><th>Action</th><th>How</th></tr>
+      <tr><td>Send a message</td><td>Type in the box → press <code>Enter</code></td></tr>
+      <tr><td>New line (don't send)</td><td><code>Shift + Enter</code></td></tr>
+      <tr><td>Interrupt while generating</td><td>Just type your new message and press <code>Enter</code> — it will stop and redirect</td></tr>
+      <tr><td>Stop current response</td><td>Click <strong>Stop Response</strong> button</td></tr>
+      <tr><td>Set workspace folder</td><td>Paste a folder path in the Workspace field at the top</td></tr>
+      <tr><td>Switch chats / view history</td><td>Click the <strong>Chats</strong> tab on the right panel</td></tr>
+      <tr><td>Toggle internet access</td><td>Click <strong>Online / Offline</strong> in the top bar</td></tr>
+      <tr><td>Emergency stop everything</td><td>Big red <strong>STOP</strong> button top-right</td></tr>
+    </table>
+  </div>
+
+  <!-- TABS -->
+  <h2><span class="num">6</span> Right Panel Tabs</h2>
+  <div class="card">
+    <table>
+      <tr><th>Tab</th><th>What it does</th></tr>
+      <tr><td><strong>Terminal</strong></td><td>Embedded terminal — run commands without leaving BennyAI</td></tr>
+      <tr><td><strong>Files</strong></td><td>Browse your workspace files</td></tr>
+      <tr><td><strong>Docs</strong></td><td>Generate README / API docs for a project</td></tr>
+      <tr><td><strong>Library</strong></td><td>Books, docs and tutorials BennyAI has downloaded for you</td></tr>
+      <tr><td><strong>Chats</strong></td><td>Previous conversations — switch between them or delete</td></tr>
+      <tr><td><strong>Stats</strong></td><td>Live performance: CPU, RAM, GPU, VRAM bars + current task status</td></tr>
+      <tr><td><strong>Remote</strong></td><td>Remote control port — lets external tools inject messages (port 7788)</td></tr>
+    </table>
+  </div>
+
+  <!-- TIPS -->
+  <h2><span class="num">7</span> Usage Tips</h2>
+  <div class="card">
+    <ul class="checklist">
+      <li><span class="check">→</span><div><strong>Set the workspace folder</strong> before asking about a project. Paste the project path in the top bar — BennyAI will read files from it automatically.</div></li>
+      <li><span class="check">→</span><div><strong>Ask it to read and explore</strong> — say "map out this project" and it will list directories and read key files on its own.</div></li>
+      <li><span class="check">→</span><div><strong>Download docs to the library</strong> — turn Online on and say "download the Django documentation to the library" so it can teach you offline later.</div></li>
+      <li><span class="check">→</span><div><strong>Benchmark first on a new PC</strong> — click <strong>Benchmark</strong> in the header and BennyAI will test your hardware and recommend the right model.</div></li>
+      <li><span class="warn">!</span><div><strong>If it hangs (0 tok/s for 30+ seconds)</strong> — close BennyAI, open Task Manager and end any <code>ollama</code> process, then restart.</div></li>
+      <li><span class="warn">!</span><div><strong>VRAM at 97% is normal while generating</strong> — that's the model running. It drops back to ~9% when idle.</div></li>
+    </ul>
+  </div>
+
+  <!-- FILE LOCATIONS -->
+  <h2><span class="num">8</span> Where Things Are Stored</h2>
+  <div class="card">
+    <table>
+      <tr><th>What</th><th>Location</th></tr>
+      <tr><td>Main app file</td><td class="path">D:\Documents\CODE\documentation_bot\bennyai.py</td></tr>
+      <tr><td>Chat history</td><td class="path">C:\Users\Benny\BennyAI\chats\</td></tr>
+      <tr><td>Downloaded library</td><td class="path">C:\Users\Benny\BennyAI\library\</td></tr>
+      <tr><td>Ollama model weights</td><td class="path">C:\Users\Benny\.ollama\models\</td></tr>
+    </table>
+  </div>
+
+  <!-- MOVING TO NEW PC -->
+  <h2><span class="num">9</span> Moving to a New PC</h2>
+  <div class="card">
+    <p>BennyAI has a built-in transfer tool. In BennyAI, go to <strong>Settings → Transfer</strong> and click <strong>Export</strong>. This creates a ZIP that includes:</p>
+    <ul style="padding-left:20px; margin-top: 10px; font-size:14px; color:var(--dim)">
+      <li>The BennyAI app file</li>
+      <li>All chat history</li>
+      <li>Your downloaded library</li>
+      <li>The Ollama model blobs</li>
+      <li>An auto-setup script that installs everything on the new machine</li>
+    </ul>
+    <div class="tip">On the new PC: install Python + Ollama, copy the ZIP over, extract it, and run <code>setup.bat</code> (Windows) or <code>setup.sh</code> (Mac/Linux). It configures everything automatically.</div>
+  </div>
+
+  <footer>BennyAI v1.0 — Built by Benny · Powered by DeepSeek Coder via Ollama</footer>
+</div>
+</body>
+</html>

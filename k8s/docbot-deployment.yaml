@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docbot
+  namespace: docbot
+  labels:
+    app: docbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docbot
+  template:
+    metadata:
+      labels:
+        app: docbot
+    spec:
+      hostAliases:
+        - ip: "192.168.65.254"    # Docker Desktop host gateway (host.docker.internal)
+          hostnames:
+            - "host-gateway"
+      volumes:
+        - name: host-d-drive
+          hostPath:
+            path: /d          # Docker Desktop maps D:\ -> /d inside the minikube VM
+            type: DirectoryOrCreate
+        - name: host-c-drive
+          hostPath:
+            path: /c          # C:\ -> /c
+            type: DirectoryOrCreate
+      containers:
+        - name: docbot
+          image: docbot:latest
+          imagePullPolicy: Never   # use locally built image via minikube's Docker daemon
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: docbot-config
+          volumeMounts:
+            - name: host-d-drive
+              mountPath: /mnt/d
+              readOnly: true
+            - name: host-c-drive
+              mountPath: /mnt/c
+              readOnly: true
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10

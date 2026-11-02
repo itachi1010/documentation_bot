@@ -1,0 +1,22 @@
+# Points K8s pods to the Ollama container running on the Docker host with GPU access.
+# Ollama runs outside K8s (host.docker.internal:11434) because NVML can't pass through
+# the Docker Desktop WSL VM into a minikube container.
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama
+  namespace: docbot
+spec:
+  type: ExternalName
+  externalName: host.docker.internal
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: ollama
+  namespace: docbot
+subsets:
+  - addresses:
+      - ip: 192.168.65.254  # Docker Desktop host gateway (host.docker.internal)
+    ports:
+      - port: 11434

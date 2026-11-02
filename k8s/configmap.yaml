@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docbot-config
+  namespace: docbot
+data:
+  OLLAMA_BASE_URL: "http://host-gateway:11434"
+  OLLAMA_MODEL: "deepseek-coder:6.7b"
+  LOG_LEVEL: "info"
